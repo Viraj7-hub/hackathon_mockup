@@ -1,0 +1,277 @@
+@import "tailwindcss";
+
+/* ===== PORSCHE DESIGN TOKENS ===== */
+:root {
+  --porsche-black: #0a0a0a;
+  --porsche-graphite: #1a1a1a;
+  --porsche-carbon: #141414;
+  --porsche-steel: #2a2a2a;
+  --porsche-silver: #8a8a8a;
+  --porsche-chrome: #c0c0c0;
+  --porsche-white: #f0f0f0;
+
+  --porsche-red: #D5001C;
+  --porsche-red-glow: rgba(213, 0, 28, 0.4);
+  --porsche-red-deep: #a30016;
+  --porsche-gold: #C8A96E;
+
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --section-padding: clamp(4rem, 10vh, 8rem);
+
+  --ease-performance: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-decel: cubic-bezier(0.0, 0.0, 0.2, 1);
+  --ease-accel: cubic-bezier(0.4, 0.0, 1, 1);
+  --duration-fast: 200ms;
+  --duration-normal: 400ms;
+  --duration-slow: 800ms;
+  --duration-cinematic: 1200ms;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-body);
+  background: var(--porsche-black);
+  color: var(--porsche-white);
+  overflow-x: hidden;
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--porsche-black);
+  color: var(--porsche-white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* ===== GLOBAL READABILITY ===== */
+p,
+li,
+span,
+label,
+td {
+  line-height: 1.75;
+}
+
+p {
+  font-size: 15px;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+}
+
+/* Ensure small/caption text is never too small */
+small,
+.caption,
+[class*="text-[8px]"],
+[class*="text-[9px]"] {
+  font-size: 12px !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.15em;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--porsche-red);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99999;
+  mix-blend-mode: difference;
+  transition: transform 0.1s var(--ease-performance);
+}
+
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid rgba(213, 0, 28, 0.5);
+  border-radius: 50%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 99998;
+  transition: width 0.3s var(--ease-performance),
+    height 0.3s var(--ease-performance),
+    border-color 0.3s var(--ease-performance);
+}
+
+.cursor-ring.expanded {
+  width: 60px;
+  height: 60px;
+  border-color: var(--porsche-red);
+}
+
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+/* ===== GLASSMORPHISM ===== */
+.glass {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--porsche-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--porsche-steel);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--porsche-red);
+}
+
+::selection {
+  background: var(--porsche-red);
+  color: var(--porsche-white);
+}
+
+/* ===== UTILITIES ===== */
+.text-gradient-red {
+  background: linear-gradient(135deg, var(--porsche-red) 0%, #ff4444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-padding {
+  padding-top: var(--section-padding);
+  padding-bottom: var(--section-padding);
+}
+
+.speed-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--porsche-red), transparent);
+  opacity: 0.3;
+  animation: speedLine 2s linear infinite;
+}
+
+@keyframes speedLine {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--porsche-red-glow);
+  }
+
+  50% {
+    box-shadow: 0 0 40px var(--porsche-red-glow), 0 0 60px rgba(213, 0, 28, 0.2);
+  }
+}
+
+.glow-pulse {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg,
+      rgba(10, 10, 10, 0.3) 0%,
+      rgba(10, 10, 10, 0.1) 40%,
+      rgba(10, 10, 10, 0.6) 80%,
+      rgba(10, 10, 10, 0.95) 100%);
+  z-index: 1;
+}
+
+.noise-overlay::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9990;
+  opacity: 0.015;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ===== CONFIG PANEL ===== */
+.config-swatch {
+  transition: transform 0.2s var(--ease-performance), box-shadow 0.2s var(--ease-performance);
+}
+
+.config-swatch:hover {
+  transform: scale(1.15);
+}
+
+.config-swatch.active {
+  box-shadow: 0 0 0 2px var(--porsche-red), 0 0 20px var(--porsche-red-glow);
+  transform: scale(1.1);
+}
